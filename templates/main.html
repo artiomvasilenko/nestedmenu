@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Nested menu</title>
+</head>
+<body>
+{% if menus %}
+    {% for menu in menus %}
+        <h3><a href="/{{ menu.id }}">{{ menu.title }}</a></h3>
+        {% if items and menu.id == id %}
+            <ul>
+            {% for item in items %}
+
+                    {% if item.parent == None %}
+                        <li>{{ item.title }}</li>
+                        <ul>
+                        {% for subitem in items %}
+                        {% if subitem.parent.id == item.id %}
+                            <li>{{ subitem.title }}</li>
+
+                        {% endif %}
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+
+            {% endfor %}
+            </ul>
+
+        {% endif %}
+
+    {% endfor %}
+
+{% else %}
+    <h3>Нифигашеньки тут нет</h3>
+{% endif %}
+
+
+
+</body>
+</html>
